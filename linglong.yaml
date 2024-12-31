@@ -7,13 +7,13 @@ version: "1"
 package:
   id: org.deepin.camera
   name: "deepin-camera"
-  version: 6.5.6.1
+  version: 6.5.9.1
   kind: app
   description: |
     camera for deepin os.
 
 base: org.deepin.base/23.1.0
-runtime: org.deepin.runtime.dtk/23.1.0
+runtime: org.deepin.runtime.dtk/23.2.0
 
 command:
   - deepin-camera
@@ -32,7 +32,7 @@ build: |
   VERSION=$(head -1 debian/changelog | awk -F'[()]' '{print $2}')
 
   # service ll-cli launch up
-  find . -type f -name "*.service" -exec sed -i 's|^Exec=.*|Exec=/usr/bin/ll-cli run org.deepin.camera --exec deepin-camera|g' {} +
+  find . -type f -name "*.service" -exec sed -i 's|^Exec=.*|Exec=deepin-camera|g' {} +
   cmake -B build ${conf_args} \
         -DCMAKE_BUILD_TYPE=Release \
         -DCMAKE_INSTALL_PREFIX=${PREFIX} \
