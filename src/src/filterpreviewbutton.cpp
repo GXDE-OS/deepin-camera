@@ -6,13 +6,22 @@
 #include "filterpreviewbutton.h"
 
 extern "C" {
-#include <libimagevisualresult/visualresult.h>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #include <libimagevisualresult6/visualresult.h>
+#else
+    #include <libimagevisualresult/visualresult.h>
+#endif
 }
 
 #include <QPainter>
 #include <QPainterPath>
 
+#if QT_VERSION_MAJOR <= 5
 #include <DApplicationHelper>
+#else
+#include <DGuiApplicationHelper>
+DGUI_USE_NAMESPACE
+#endif
 
 DWIDGET_USE_NAMESPACE;
 
@@ -83,7 +92,11 @@ void filterPreviewButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
+#if QT_VERSION_MAJOR > 5
+    painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
+#else
     painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
+#endif
 
     QRect imageRect = QRect(MARGIN, MARGIN, IMAGE_SIZE, IMAGE_SIZE);
 
@@ -146,7 +159,11 @@ void filterPreviewButton::paintEvent(QPaintEvent *event)
     QWidget::paintEvent(event);
 }
 
+#if QT_VERSION_MAJOR > 5
+void filterPreviewButton::enterEvent(QEnterEvent *event)
+#else
 void filterPreviewButton::enterEvent(QEvent *event)
+#endif
 {
     Q_UNUSED(event);
     this->setFocus();
@@ -188,7 +205,7 @@ void filterPreviewButton::mousePressEvent(QMouseEvent *event)
 
 void filterPreviewButton::mouseMoveEvent(QMouseEvent *event)
 {
-    //解决bug 在按钮中可拖动相机界面，https://pms.uniontech.com/zentao/bug-view-100647.html
+    //解决bug 在按钮中可拖动相机界面，bug 100647
     Q_UNUSED(event);
     return;
 }

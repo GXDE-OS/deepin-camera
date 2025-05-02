@@ -1,178 +1,178 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="id">
 <context>
     <name>CMainWindow</name>
     <message>
         <source>Video recording is in progress. Close the window?</source>
-        <translation>Η εγγραφή βίντεο είναι σε εξέλιξη. Να κλείσει το παράθυρο;</translation>
+        <translation>Perekaman video sedang berlangsung. Tutup jendela?</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="vanished">Άνοιγμα φακέλου</translation>
+        <translation type="vanished">Buka folder</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>Kosong</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>Foto</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Switch Cameras</source>
-        <translation type="unfinished"/>
+        <translation>Ganti Kamera</translation>
     </message>
 </context>
 <context>
     <name>CloseDialog</name>
     <message>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>Batal</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Κλείσιμο</translation>
+        <translation>Tutup</translation>
     </message>
 </context>
 <context>
     <name>ImageItem</name>
     <message>
         <source>Copy</source>
-        <translation>Αντιγραφή</translation>
+        <translation>Salin</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
+        <translation>Hapus</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation>Άνοιγμα φακέλου</translation>
+        <translation>Buka folder</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation>Cetak</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>You don&apos;t have permission to operate this folder</source>
-        <translation>Δεν έχετε άδεια πρόσβασης στον φάκελο</translation>
+        <translation>Anda tidak memiliki izin untuk mengoperasikan folder ini</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Κλείσιμο</translation>
+        <translation>Tutup</translation>
     </message>
     <message>
         <source>Invalid folder</source>
-        <translation type="vanished">Μη έγκυρος φάκελος</translation>
+        <translation type="vanished">Folder tidak valid</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation>Άνοιγμα φακέλου</translation>
+        <translation>Buka folder</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Βασικό</translation>
+        <translation>Dasar</translation>
     </message>
     <message>
         <source>File location</source>
-        <translation>Τοποθεσία φακέλου</translation>
+        <translation>Lokasi file</translation>
     </message>
     <message>
         <source>Shoot</source>
-        <translation>Λήψη</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Burst mode</source>
-        <translation>Γρήγορη λειτουργία</translation>
+        <translation>Mode burst</translation>
     </message>
     <message>
         <source>Self-timer delay</source>
-        <translation>Χρονοκαθυστέρηση</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Output</source>
-        <translation>Έξοδος</translation>
+        <translation>Keluaran</translation>
     </message>
     <message>
         <source>Output format</source>
-        <translation>Φορμά Εξόδου</translation>
+        <translation>Format keluaran</translation>
     </message>
     <message>
         <source>4 pcs</source>
-        <translation>4 τμχ</translation>
+        <translation>4 pcs</translation>
     </message>
     <message>
         <source>10 pcs</source>
-        <translation>10 τμχ</translation>
+        <translation>10 pcs</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>Kosong</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Κάμερα</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Camera is an image and video capture utility using your PC camera or webcam.</source>
-        <translation>Το Camera είναι ένα εργαλείο λήψης και εγγραφής φωτογραφιών και βίντεο, με τη χρήση της κάμερας του υπολογιστή σας.</translation>
+        <translation>Kamera adalah utilitas pengambil gambar dan video menggunakan kamera PC atau webcam Anda</translation>
     </message>
     <message>
         <source>File not saved</source>
-        <translation>Το αρχείο δεν αποθηκεύτηκε</translation>
+        <translation>File tidak disimpan</translation>
     </message>
     <message>
         <source>Save to:</source>
-        <translation type="vanished">Αποθήκευση σε:</translation>
+        <translation type="vanished">Simpan ke:</translation>
     </message>
     <message>
         <source>Photo:</source>
-        <translation>Φωτογραφία:</translation>
+        <translation>Foto:</translation>
     </message>
     <message>
         <source>Video:</source>
-        <translation>Βίντεο:</translation>
+        <translation>Video:</translation>
     </message>
     <message>
         <source>Resolution settings</source>
-        <translation>Ρυθμίσεις ανάλυσεις</translation>
+        <translation>Pengaturan resolusi</translation>
     </message>
     <message>
         <source>Resolution:</source>
-        <translation type="vanished">Ανάλυση:</translation>
+        <translation type="vanished">Resolusi:</translation>
     </message>
     <message>
         <source>Photos:</source>
-        <translation type="unfinished"/>
+        <translation>Foto:</translation>
     </message>
     <message>
         <source>Videos:</source>
-        <translation type="unfinished"/>
+        <translation>Video:</translation>
     </message>
     <message>
         <source>Sound effects</source>
-        <translation type="unfinished"/>
+        <translation>Efek suara</translation>
     </message>
     <message>
         <source>Mirror mode</source>
-        <translation type="unfinished"/>
+        <translation>Mode mirror </translation>
     </message>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"/>
+        <translation>Senter</translation>
     </message>
     <message>
         <source>Gridlines</source>
@@ -195,127 +195,119 @@
     <name>Shortcut</name>
     <message>
         <source>Camera</source>
-        <translation>Κάμερα</translation>
+        <translation>Kamera</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>Pengaturan</translation>
     </message>
     <message>
         <source>Stop recording</source>
-        <translation>Λήξη εγγραφής</translation>
+        <translation>Berhenti merekam</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Αντιγραφή</translation>
+        <translation>Salin</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
+        <translation>Hapus</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"/>
+        <translation>Buka</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation>Cetak</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>Bantuan</translation>
     </message>
     <message>
         <source>Display shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>Tampilkan pintasan</translation>
     </message>
     <message>
         <source>Stop taking photos</source>
-        <translation>Ακύρωση λήψης φωτογραφιών</translation>
+        <translation>Berhenti mengambil foto</translation>
     </message>
     <message>
         <source>Context menu</source>
-        <translation type="unfinished"/>
+        <translation>Menu konteks</translation>
     </message>
 </context>
 <context>
     <name>ThumbnailsBar</name>
     <message>
         <source>Take photo</source>
-        <translation type="vanished">Λήψη φωτογραφίας</translation>
+        <translation type="vanished">Ambil foto</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="vanished">Εγγραφή βίντεο</translation>
+        <translation type="vanished">Rekam video</translation>
     </message>
     <message>
         <source>Stop taking photos</source>
-        <translation type="vanished">Ακύρωση λήψης φωτογραφιών</translation>
+        <translation type="vanished">Berhenti mengambil foto</translation>
     </message>
 </context>
 <context>
     <name>dc::Settings</name>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
-    </message>
-    <message>
-        <source>mp4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>webm</source>
-        <translation type="unfinished"></translation>
+        <translation>Kosong</translation>
     </message>
 </context>
 <context>
     <name>filterPreviewButton</name>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"/>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Vivid</source>
-        <translation type="unfinished"/>
+        <translation>Vivid</translation>
     </message>
     <message>
         <source>Warm</source>
-        <translation type="unfinished"/>
+        <translation>Warm</translation>
     </message>
     <message>
         <source>Cold</source>
-        <translation type="unfinished"/>
+        <translation>Cold</translation>
     </message>
     <message>
         <source>Retro</source>
-        <translation type="unfinished"/>
+        <translation>Retro</translation>
     </message>
     <message>
         <source>Film</source>
-        <translation type="unfinished"/>
+        <translation>Film</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"/>
+        <translation>Gray</translation>
     </message>
     <message>
         <source>B&amp;W</source>
-        <translation type="unfinished"/>
+        <translation>B&amp;W</translation>
     </message>
 </context>
 <context>
     <name>takePhotoSettingAreaWidget</name>
     <message>
         <source>Flashlight</source>
-        <translation type="unfinished"/>
+        <translation>Senter</translation>
     </message>
     <message>
         <source>On</source>
-        <translation type="unfinished"/>
+        <translation>Nyalakan</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"/>
+        <translation>Padamkan</translation>
     </message>
     <message>
         <source>Delay capture</source>
@@ -323,11 +315,11 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>Kosong</translation>
     </message>
     <message>
         <source>Filters</source>
-        <translation type="unfinished"/>
+        <translation>Filter</translation>
     </message>
     <message>
         <source>Exposure</source>
@@ -338,15 +330,15 @@
     <name>videowidget</name>
     <message>
         <source>No webcam found</source>
-        <translation>Δεν βρέθηκε κάμερα</translation>
+        <translation>Webcam tidak ditemukan</translation>
     </message>
     <message>
         <source>The webcam is in use</source>
-        <translation>Η κάμερα είναι σε χρήση</translation>
+        <translation>Webcam sedang digunakan</translation>
     </message>
     <message>
         <source>Stop recording</source>
-        <translation type="vanished">Λήξη εγγραφής</translation>
+        <translation type="vanished">Berhenti merekam</translation>
     </message>
 </context>
 </TS>

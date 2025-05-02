@@ -54,7 +54,11 @@ void circlePushButton::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
+#if QT_VERSION_MAJOR > 5
+    painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
+#else
     painter.setRenderHints(QPainter::HighQualityAntialiasing | QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
+#endif
 
     int distance = 2;
     int tmpWidth = width();
@@ -141,7 +145,11 @@ void circlePushButton::paintEvent(QPaintEvent *event)
     painter.restore();
 }
 
+#if QT_VERSION_MAJOR > 5
+void circlePushButton::enterEvent(QEnterEvent *event)
+#else
 void circlePushButton::enterEvent(QEvent *event)
+#endif
 {
     Q_UNUSED(event);
     m_hover = true;
@@ -196,7 +204,7 @@ void circlePushButton::mousePressEvent(QMouseEvent *event)
 
 void circlePushButton::mouseMoveEvent(QMouseEvent *event)
 {
-    //解决bug 在按钮中可拖动相机界面，https://pms.uniontech.com/zentao/bug-view-100647.html
+    //解决bug 在按钮中可拖动相机界面，bug 100647
     Q_UNUSED(event);
     return;
 }

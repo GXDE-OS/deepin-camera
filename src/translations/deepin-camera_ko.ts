@@ -1,170 +1,170 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="el">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ko">
 <context>
     <name>CMainWindow</name>
     <message>
         <source>Video recording is in progress. Close the window?</source>
-        <translation>Η εγγραφή βίντεο είναι σε εξέλιξη. Να κλείσει το παράθυρο;</translation>
+        <translation>비디오 녹화가 진행 중입니다. 창을 닫으시겠습니까?</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="vanished">Άνοιγμα φακέλου</translation>
+        <translation type="vanished">폴더 열기</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>설정</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>없음</translation>
     </message>
     <message>
         <source>Photo</source>
-        <translation type="unfinished"/>
+        <translation>사진</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"/>
+        <translation>비디오</translation>
     </message>
     <message>
         <source>Switch Cameras</source>
-        <translation type="unfinished"/>
+        <translation>카메라 변경하기</translation>
     </message>
 </context>
 <context>
     <name>CloseDialog</name>
     <message>
         <source>Cancel</source>
-        <translation>Ακύρωση</translation>
+        <translation>취소</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Κλείσιμο</translation>
+        <translation>닫기</translation>
     </message>
 </context>
 <context>
     <name>ImageItem</name>
     <message>
         <source>Copy</source>
-        <translation>Αντιγραφή</translation>
+        <translation>복사</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
+        <translation>삭제</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation>Άνοιγμα φακέλου</translation>
+        <translation>폴더 열기</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation>인쇄</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>You don&apos;t have permission to operate this folder</source>
-        <translation>Δεν έχετε άδεια πρόσβασης στον φάκελο</translation>
+        <translation>이 폴더를 조작할 수 있는 권한이 없습니다.</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Κλείσιμο</translation>
+        <translation>닫기</translation>
     </message>
     <message>
         <source>Invalid folder</source>
-        <translation type="vanished">Μη έγκυρος φάκελος</translation>
+        <translation type="vanished">올바르지 않은 폴더</translation>
     </message>
     <message>
         <source>Open folder</source>
-        <translation>Άνοιγμα φακέλου</translation>
+        <translation>폴더 열기</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>설정</translation>
     </message>
     <message>
         <source>Basic</source>
-        <translation>Βασικό</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>File location</source>
-        <translation>Τοποθεσία φακέλου</translation>
+        <translation>파일 위치</translation>
     </message>
     <message>
         <source>Shoot</source>
-        <translation>Λήψη</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Burst mode</source>
-        <translation>Γρήγορη λειτουργία</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Self-timer delay</source>
-        <translation>Χρονοκαθυστέρηση</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>Output</source>
-        <translation>Έξοδος</translation>
+        <translation>출력</translation>
     </message>
     <message>
         <source>Output format</source>
-        <translation>Φορμά Εξόδου</translation>
+        <translation>출력 형식</translation>
     </message>
     <message>
         <source>4 pcs</source>
-        <translation>4 τμχ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>10 pcs</source>
-        <translation>10 τμχ</translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>없음</translation>
     </message>
     <message>
         <source>Camera</source>
-        <translation>Κάμερα</translation>
+        <translation>카메라</translation>
     </message>
     <message>
         <source>Camera is an image and video capture utility using your PC camera or webcam.</source>
-        <translation>Το Camera είναι ένα εργαλείο λήψης και εγγραφής φωτογραφιών και βίντεο, με τη χρήση της κάμερας του υπολογιστή σας.</translation>
+        <translation>카메라는 PC 카메라 또는 웹캠을 사용하는 이미지 및 비디오 캡처 유틸리티입니다.</translation>
     </message>
     <message>
         <source>File not saved</source>
-        <translation>Το αρχείο δεν αποθηκεύτηκε</translation>
+        <translation>파일이 저장되지 않음</translation>
     </message>
     <message>
         <source>Save to:</source>
-        <translation type="vanished">Αποθήκευση σε:</translation>
+        <translation type="vanished">저장 위치:</translation>
     </message>
     <message>
         <source>Photo:</source>
-        <translation>Φωτογραφία:</translation>
+        <translation>사진:</translation>
     </message>
     <message>
         <source>Video:</source>
-        <translation>Βίντεο:</translation>
+        <translation>비디오:</translation>
     </message>
     <message>
         <source>Resolution settings</source>
-        <translation>Ρυθμίσεις ανάλυσεις</translation>
+        <translation>해상도 설정</translation>
     </message>
     <message>
         <source>Resolution:</source>
-        <translation type="vanished">Ανάλυση:</translation>
+        <translation type="vanished">해상도:</translation>
     </message>
     <message>
         <source>Photos:</source>
-        <translation type="unfinished"/>
+        <translation>사진:</translation>
     </message>
     <message>
         <source>Videos:</source>
-        <translation type="unfinished"/>
+        <translation>비디오:</translation>
     </message>
     <message>
         <source>Sound effects</source>
-        <translation type="unfinished"/>
+        <translation>음향 효과</translation>
     </message>
     <message>
         <source>Mirror mode</source>
@@ -195,43 +195,43 @@
     <name>Shortcut</name>
     <message>
         <source>Camera</source>
-        <translation>Κάμερα</translation>
+        <translation>카메라</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation>Ρυθμίσεις</translation>
+        <translation>설정</translation>
     </message>
     <message>
         <source>Stop recording</source>
-        <translation>Λήξη εγγραφής</translation>
+        <translation>녹화 중지</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Αντιγραφή</translation>
+        <translation>복사</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Διαγραφή</translation>
+        <translation>삭제</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"/>
+        <translation>열기</translation>
     </message>
     <message>
         <source>Print</source>
-        <translation type="unfinished"/>
+        <translation>인쇄</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"/>
+        <translation>도움말</translation>
     </message>
     <message>
         <source>Display shortcuts</source>
-        <translation type="unfinished"/>
+        <translation>단축키 보이기</translation>
     </message>
     <message>
         <source>Stop taking photos</source>
-        <translation>Ακύρωση λήψης φωτογραφιών</translation>
+        <translation>사진 촬영 중지</translation>
     </message>
     <message>
         <source>Context menu</source>
@@ -242,30 +242,22 @@
     <name>ThumbnailsBar</name>
     <message>
         <source>Take photo</source>
-        <translation type="vanished">Λήψη φωτογραφίας</translation>
+        <translation type="vanished">사진 찍기</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="vanished">Εγγραφή βίντεο</translation>
+        <translation type="vanished">비디오 녹화</translation>
     </message>
     <message>
         <source>Stop taking photos</source>
-        <translation type="vanished">Ακύρωση λήψης φωτογραφιών</translation>
+        <translation type="vanished">사진 촬영 중지</translation>
     </message>
 </context>
 <context>
     <name>dc::Settings</name>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
-    </message>
-    <message>
-        <source>mp4</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>webm</source>
-        <translation type="unfinished"></translation>
+        <translation>없음</translation>
     </message>
 </context>
 <context>
@@ -323,7 +315,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Κανένα</translation>
+        <translation>없음</translation>
     </message>
     <message>
         <source>Filters</source>
@@ -338,15 +330,15 @@
     <name>videowidget</name>
     <message>
         <source>No webcam found</source>
-        <translation>Δεν βρέθηκε κάμερα</translation>
+        <translation>웹캠을 찾을 수 없음</translation>
     </message>
     <message>
         <source>The webcam is in use</source>
-        <translation>Η κάμερα είναι σε χρήση</translation>
+        <translation>웹캠이 사용 중입니다</translation>
     </message>
     <message>
         <source>Stop recording</source>
-        <translation type="vanished">Λήξη εγγραφής</translation>
+        <translation type="vanished">녹화 중지</translation>
     </message>
 </context>
 </TS>

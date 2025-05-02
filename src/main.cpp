@@ -17,13 +17,19 @@ extern "C" {
 #endif
 
 extern "C" {
-#include <libimagevisualresult/visualresult.h>
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #include <libimagevisualresult6/visualresult.h>
+#else
+    #include <libimagevisualresult/visualresult.h>
+#endif
 }
 
 #include <DMainWindow>
 #include <DWidgetUtil>
 #include <DLog>
+#if QT_VERSION_MAJOR <= 5
 #include <DApplicationSettings>
+#endif
 
 #include <QSharedMemory>
 #include <QTime>
@@ -59,7 +65,17 @@ static bool CheckFFmpegEnv()
     QString path = QLibraryInfo::location(QLibraryInfo::LibrariesPath);
     dir.setPath(path);
     QStringList list = dir.entryList(QStringList() << (QString("libavcodec") + "*"), QDir::NoDotAndDotDot | QDir::Files);
-    QString libName = "libavcodec.so"; // set default name for load if not find in LibrariesPath 
+    QString libName = "libavcodec.so"; // set default name for load if not find in LibrariesPath
+#if QT_VERSION_MAJOR > 5
+    QRegularExpression re("libavcodec.so.*");   //Sometimes libavcodec.so may not exist, so find it through regular expression.
+    for (int i = 0; i < list.count(); i++) {
+        QRegularExpressionMatch match = re.match(list[i]);
+        if (match.hasMatch()) {
+            libName = list[i];
+            break;
+        }
+    }
+#else
     QRegExp re("libavcodec.so.*");   //Sometimes libavcodec.so may not exist, so find it through regular expression.
     for (int i = 0; i < list.count(); i++) {
         if (re.exactMatch(list[i])) {
@@ -67,6 +83,7 @@ static bool CheckFFmpegEnv()
             break;
         }
     }
+#endif
 
     QLibrary libavcodec;   //检查编码器是否存在
     libavcodec.setFileName(libName);
@@ -158,7 +175,11 @@ int main(int argc, char *argv[])
         qInfo() << "last mp4EncodeMode value is:" << get_pugx_status();
     }
 
+#if QT_VERSION_MAJOR > 5
+    QElapsedTimer time;
+#else
     QTime time;
+#endif
     time.start();
     QString lutDir = LUT_DIR;
     initFilters(lutDir.toStdString().c_str());
@@ -199,7 +220,9 @@ int main(int argc, char *argv[])
 
     dc::Settings::get().init();
 
+#if QT_VERSION_MAJOR <= 5
     DApplicationSettings saveTheme;
+#endif
 
     if (!qApp->setSingleInstance("deepin-camera")) {
         qDebug() << "another deepin camera instance has started";
