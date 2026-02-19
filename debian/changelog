@@ -1,4 +1,4 @@
-deepin-camera (6.5.39gxde1) UNRELEASED; urgency=medium
+deepin-camera (6.5.38gxde1) UNRELEASED; urgency=medium
 
   * fix: Fix GXDE 25 build fail
 
