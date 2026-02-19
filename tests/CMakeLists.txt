@@ -4,7 +4,7 @@ project(deepin-camera-test VERSION 1.0.0)
 set(CMD_NAME deepin-camera-test)
 set(TARGET_NAME deepin-camera-test)
 # 定义需要的cmake版本
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)

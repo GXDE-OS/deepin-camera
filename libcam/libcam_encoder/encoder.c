@@ -68,6 +68,8 @@
 #include <libavutil/pixdesc.h>
 #include <libavutil/hwcontext.h>
 
+#include <va/va_x11.h> 
+
 typedef enum _vaapi_status_t
 {
 	HW_VAAPI_OK = 0,
@@ -783,12 +785,12 @@ static encoder_audio_context_t *encoder_audio_init(encoder_context_t *encoder_ct
     audio_codec_data->codec_context->flags |= audio_defaults->flags;
 
     audio_codec_data->codec_context->sample_rate = encoder_ctx->audio_samprate;
-    audio_codec_data->codec_context->channels = encoder_ctx->audio_channels;
+    av_channel_layout_default(&audio_codec_data->codec_context->ch_layout, encoder_ctx->audio_channels);
 
     if (encoder_ctx->audio_channels < 2)
-        audio_codec_data->codec_context->channel_layout = AV_CH_LAYOUT_MONO;
+        av_channel_layout_default(&audio_codec_data->codec_context->ch_layout, encoder_ctx->audio_channels);
     else
-        audio_codec_data->codec_context->channel_layout = AV_CH_LAYOUT_STEREO;
+        av_channel_layout_default(&audio_codec_data->codec_context->ch_layout, encoder_ctx->audio_channels);
 
     audio_codec_data->codec_context->cutoff = 0; /*automatic*/
 
@@ -922,8 +924,7 @@ static encoder_audio_context_t *encoder_audio_init(encoder_context_t *encoder_ct
 
     audio_codec_data->frame->nb_samples = frame_size;
     audio_codec_data->frame->format = audio_defaults->sample_format;
-    audio_codec_data->frame->channels = audio_codec_data->codec_context->channels;
-    audio_codec_data->frame->channel_layout = audio_codec_data->codec_context->channel_layout;
+    av_channel_layout_copy(&audio_codec_data->frame->ch_layout, &audio_codec_data->codec_context->ch_layout);
 
     /*set codec data in encoder context*/
     enc_audio_ctx->codec_data = (void *) audio_codec_data;
@@ -1521,15 +1522,15 @@ static int libav_send_encode(AVCodecContext *avctx, AVFrame *frame)
 
     if (!getLoadLibsInstance()->m_avcodec_is_open(avctx))
         fprintf(stderr, "ENCODER: codec not opened\n");
-    if (!getLoadLibsInstance()->m_av_codec_is_encoder(avctx->codec))
+    if (!getLoadLibsInstance()->m_av_codec_is_encoder((AVCodec*)avctx->codec))
         fprintf(stderr, "ENCODER: codec not an encoder\n");
 
     if (frame) {
         if (avctx->codec_type == AVMEDIA_TYPE_AUDIO && frame->nb_samples != avctx->frame_size)
             fprintf(stderr, "ENCODER: audio samples differ from frame size\n");
-        if (avctx->codec_type == AVMEDIA_TYPE_AUDIO && frame->channels <= 0) {
+        if (avctx->codec_type == AVMEDIA_TYPE_AUDIO && frame->ch_layout.nb_channels <= 0) {
             fprintf(stderr, "ENCODER: no audio channels set in frame\n");
-            frame->channels = avctx->channels;
+            av_channel_layout_copy(&frame->ch_layout, &avctx->ch_layout);
         }
         ret = getLoadLibsInstance()->m_avcodec_send_frame(avctx, frame);
         if (ret < 0) {
@@ -1794,7 +1795,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
 
         int buffer_size = getAvutil()->m_av_samples_get_buffer_size(
                               NULL,
-                              audio_codec_data->codec_context->channels,
+                              audio_codec_data->codec_context->ch_layout.nb_channels,
                               audio_codec_data->codec_context->frame_size,
                               audio_codec_data->codec_context->sample_fmt,
                               align);
@@ -1802,7 +1803,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
         if (buffer_size <= 0) {
             fprintf(stderr, "ENCODER: (encoder_encode_audio) PCM av_samples_get_buffer_size error (%d): chan(%d) nb_samp(%d) samp_fmt(%d)\n",
                     buffer_size,
-                    audio_codec_data->codec_context->channels,
+                    audio_codec_data->codec_context->ch_layout.nb_channels,
                     audio_codec_data->codec_context->frame_size,
                     audio_codec_data->codec_context->sample_fmt);
 
@@ -1835,7 +1836,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
 
         int buffer_size = getAvutil()->m_av_samples_get_buffer_size(
                               NULL,
-                              audio_codec_data->codec_context->channels,
+                              audio_codec_data->codec_context->ch_layout.nb_channels,
                               audio_codec_data->frame->nb_samples,
                               audio_codec_data->codec_context->sample_fmt,
                               align);
@@ -1843,7 +1844,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
         if (buffer_size <= 0) {
             fprintf(stderr, "ENCODER: (encoder_encode_audio) av_samples_get_buffer_size error (%d): chan(%d) nb_samp(%d) samp_fmt(%d)\n",
                     buffer_size,
-                    audio_codec_data->codec_context->channels,
+                    audio_codec_data->codec_context->ch_layout.nb_channels,
                     audio_codec_data->frame->nb_samples,
                     audio_codec_data->codec_context->sample_fmt);
 
@@ -1854,7 +1855,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
         /*set the data pointers in frame*/
         ret = getLoadLibsInstance()->m_avcodec_fill_audio_frame(
                   audio_codec_data->frame,
-                  audio_codec_data->codec_context->channels,
+                  audio_codec_data->codec_context->ch_layout.nb_channels,
                   audio_codec_data->codec_context->sample_fmt,
                   (const uint8_t *) audio_data,
                   buffer_size,
@@ -1863,7 +1864,7 @@ int encoder_encode_audio(encoder_context_t *encoder_ctx, void *audio_data)
         if (ret < 0) {
             fprintf(stderr, "ENCODER: (encoder_encode_audio) avcodec_fill_audio_frame error (%d): chan(%d) nb_samp(%d) samp_fmt(%d) buff(%d bytes)\n",
                     ret,
-                    audio_codec_data->codec_context->channels,
+                    audio_codec_data->codec_context->ch_layout.nb_channels,
                     audio_codec_data->frame->nb_samples,
                     audio_codec_data->codec_context->sample_fmt,
                     buffer_size);

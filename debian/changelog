@@ -1,3 +1,9 @@
+deepin-camera (6.5.39gxde1) UNRELEASED; urgency=medium
+
+  * fix: Fix GXDE 25 build fail
+
+ -- zeqi <a202128502@163.com>  Thu, 19 Feb 2026 15:59:19 +0800
+
 deepin-camera (6.5.38) unstable; urgency=medium
 
   * fix: Fix build fail
@@ -351,3 +357,4 @@ deepin-camera (1.0.0-1) unstable; urgency=medium
   * Initial release 
 
  -- Deepin Packages Builder <packages@linuxdeepin.com>  Wed, 24 Feb 2016 14:15:54 +0800
+

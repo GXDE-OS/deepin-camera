@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.10)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -155,9 +155,9 @@ pkg_check_modules(3rd_lib REQUIRED
 #        libv4l2
 #        libudev
 #        libusb-1.0
-#        libavcodec
-#        libavutil
-#        libavformat
+        libavcodec
+        libavutil
+        libavformat
 #        libswscale
 #        libpng
 #        sdl2
