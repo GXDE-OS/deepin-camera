@@ -1,3 +1,9 @@
+deepin-camera (6.5.40) UNRELEASED; urgency=medium
+
+  * 修复图片和视频不能预览的问题
+
+ -- gfdgd_xi <3025613752@qq.com>  Sun, 22 Mar 2026 22:35:28 +0800
+
 deepin-camera (6.5.39) unstable; urgency=medium
 
   * chore: Unify linglong.yaml
