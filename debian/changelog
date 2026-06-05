@@ -1,8 +1,20 @@
-deepin-camera (6.5.40) UNRELEASED; urgency=medium
+deepin-camera (6.5.40gxde1) UNRELEASED; urgency=medium
 
-  * 修复图片和视频不能预览的问题
+  * 修改版本号
 
- -- gfdgd_xi <3025613752@qq.com>  Sun, 22 Mar 2026 22:35:28 +0800
+ -- gfdgd_xi <3025613752@qq.com>  Fri, 05 Jun 2026 22:10:13 +0800
+
+deepin-camera (6.5.40) unstable; urgency=medium
+
+  * [skip CI] Translate deepin-camera_en_US.ts in ru
+  * [skip CI] Translate deepin-camera_en_US.ts in ru
+  * chore(CI): add debian check workflow
+  * fix: Add DConfig for preview with no delay.
+  * fix: In the prompt interface, the grid is hidden to improve user experience.
+  * feat: The prompt images for the FLM(support camera switch) have been opti...
+  * chore: Bump version to 6.5.39
+
+ -- Wang Yu <wangyu@uniontech.com>  Mon, 19 May 2026 20:06:24 +0800
 
 deepin-camera (6.5.39) unstable; urgency=medium
 
@@ -356,7 +368,7 @@ deepin-camera (6.0.2) unstable; urgency=medium
 
   * New version 6.0.2
 
- -- shuaijie <shuaijie@uniontech.com>  Fri, 10 March 2023 16:21:00 +0800
+ -- shuaijie <shuaijie@uniontech.com>  Fri, 10 Mar 2023 16:21:00 +0800
 
 deepin-camera (6.0.1) unstable; urgency=medium
 

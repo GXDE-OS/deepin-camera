@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ru">
 <context>
     <name>CMainWindow</name>
     <message>
         <source>Video recording is in progress. Close the window?</source>
-        <translation>Видео запись в процессе. Закрыть окно?</translation>
+        <translation>Ведётся видеозапись. Закрыть окно?</translation>
     </message>
     <message>
         <source>Open folder</source>
@@ -98,7 +96,7 @@
     </message>
     <message>
         <source>Burst mode</source>
-        <translation>Режим серийной съемки</translation>
+        <translation>Режим серийной съёмки</translation>
     </message>
     <message>
         <source>Self-timer delay</source>
@@ -122,7 +120,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Ничего</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Camera</source>
@@ -130,11 +128,11 @@
     </message>
     <message>
         <source>Camera is an image and video capture utility using your PC camera or webcam.</source>
-        <translation>Камера - это приложение для захвата изображения и записи видео, используя веб-камеру вашего компьютера.</translation>
+        <translation>Камера — это приложение для захвата изображения и записи видео, используя веб-камеру вашего компьютера.</translation>
     </message>
     <message>
         <source>File not saved</source>
-        <translation>Файл не сохранен</translation>
+        <translation>Файл не сохранён</translation>
     </message>
     <message>
         <source>Save to:</source>
@@ -259,15 +257,15 @@
     <name>dc::Settings</name>
     <message>
         <source>None</source>
-        <translation>Ничего</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>mp4</source>
-        <translation>mp4</translation>
+        <translation>MP4</translation>
     </message>
     <message>
         <source>webm</source>
-        <translation type="unfinished"></translation>
+        <translation>WebM</translation>
     </message>
 </context>
 <context>
@@ -282,7 +280,7 @@
     </message>
     <message>
         <source>Warm</source>
-        <translation>Теплый</translation>
+        <translation>Тёплый</translation>
     </message>
     <message>
         <source>Cold</source>
@@ -294,7 +292,7 @@
     </message>
     <message>
         <source>Film</source>
-        <translation>Пленка</translation>
+        <translation>Плёнка</translation>
     </message>
     <message>
         <source>Gray</source>
@@ -302,7 +300,7 @@
     </message>
     <message>
         <source>B&amp;W</source>
-        <translation>Черно-белый</translation>
+        <translation>Чёрно-белый</translation>
     </message>
 </context>
 <context>
@@ -317,7 +315,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation>Выкл</translation>
+        <translation>Откл</translation>
     </message>
     <message>
         <source>Delay capture</source>
@@ -325,7 +323,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Ничего</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Filters</source>
@@ -340,11 +338,11 @@
     <name>videowidget</name>
     <message>
         <source>No webcam found</source>
-        <translation>Веб камера не найдена</translation>
+        <translation>Веб-камера не найдена</translation>
     </message>
     <message>
         <source>The webcam is in use</source>
-        <translation>Веб камера включена</translation>
+        <translation>Веб-камера включена</translation>
     </message>
     <message>
         <source>Stop recording</source>
