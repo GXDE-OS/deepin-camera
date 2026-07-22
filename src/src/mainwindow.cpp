@@ -142,47 +142,6 @@ static QString ElideText(const QString &text, const QSize &size,
     return textlinestr;
 }
 
-static QWidget *createFormatLabelOptionHandle(QObject *opt)
-{
-    // qDebug() << "Function started: createFormatLabelOptionHandle";
-    DTK_CORE_NAMESPACE::DSettingsOption *option = qobject_cast<DTK_CORE_NAMESPACE::DSettingsOption *>(opt);
-    DLabel *lab = new DLabel();
-    DWidget *main = new DWidget();
-    QHBoxLayout *layout = new QHBoxLayout;
-    QWidget *optionWidget = new QWidget;
-    QFormLayout *optionLayout = new QFormLayout(optionWidget);
-
-    main->setLayout(layout);
-    main->setContentsMargins(0, 0, 0, 0);
-    main->setMinimumWidth(240);
-    //main->setMinimumHeight(20);
-    layout->addWidget(lab);
-    layout->setContentsMargins(0, 0, 0, 0);
-    layout->setAlignment(Qt::AlignVCenter);
-    lab->setObjectName(OPTION_FORMAT_LABER);
-    lab->setAccessibleName(OPTION_FORMAT_LABER);
-    //lab->setMinimumHeight(20);
-
-    lab->setText(option->value().toString());
-    DFontSizeManager::instance()->bind(lab, DFontSizeManager::T6);
-    lab->setAlignment(Qt::AlignVCenter);
-    lab->show();
-    optionWidget->setObjectName(OPTION_FRAME);
-    optionWidget->setAccessibleName(OPTION_FRAME);
-    optionLayout->setContentsMargins(0, 0, 0, 0);
-
-    optionLayout->setSpacing(0);
-    DLabel *dLabel = new DLabel(QObject::tr(option->name().toStdString().c_str()));
-    //dLabel->setMinimumHeight(20);
-    dLabel->setAlignment(Qt::AlignVCenter);
-    optionLayout->addRow(dLabel, main);
-    optionWidget->setContentsMargins(0, 0, 0, 0);
-    workaround_updateStyle(optionWidget, "light");
-
-    // qDebug() << "Function completed: createFormatLabelOptionHandle";
-    return optionWidget;
-}
-
 static QWidget *createPicSelectableLineEditOptionHandle(QObject *opt)
 {
     // qDebug() << "Function started: createPicSelectableLineEditOptionHandle";
@@ -1138,7 +1097,6 @@ void CMainWindow::settingDialog()
     m_SetDialog->setFixedSize(820, 600);
     m_SetDialog->widgetFactory()->registerWidget("selectableEditpic", createPicSelectableLineEditOptionHandle);
     m_SetDialog->widgetFactory()->registerWidget("selectableEditvd", createVdSelectableLineEditOptionHandle);
-    m_SetDialog->widgetFactory()->registerWidget("formatLabel", createFormatLabelOptionHandle);
     m_SetDialog->setObjectName(SETTING_DIALOG);
     m_SetDialog->setAccessibleName(SETTING_DIALOG);
 
