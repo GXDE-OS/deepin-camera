@@ -1,5 +1,5 @@
 // Copyright (C) 2020 ~ 2021 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// SPDX-FileCopyrightText: 2023 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -24,7 +24,6 @@ DCORE_USE_NAMESPACE
 MajorImageProcessingThread::MajorImageProcessingThread():m_bHorizontalMirror(false)
 {
     qDebug() << "Initializing MajorImageProcessingThread";
-    m_yuvPtr = nullptr;
     m_rgbPtr = nullptr;
     m_bRecording = false;
     m_nVdWidth = 0;
@@ -251,13 +250,10 @@ void MajorImageProcessingThread::run()
                 if (m_nVdWidth != static_cast<unsigned int>(m_frame->width) || m_nVdHeight != static_cast<unsigned int>(m_frame->height)) {
                     m_nVdWidth = static_cast<unsigned int>(m_frame->width);
                     m_nVdHeight = static_cast<unsigned int>(m_frame->height);
-                    if (m_yuvPtr != nullptr) {
-                        delete [] m_yuvPtr;
-                        m_yuvPtr = nullptr;
-                    }
+                    m_yuvPtr.reset();
 
                     yuvsize = m_nVdWidth * m_nVdHeight * 3 / 2;
-                    m_yuvPtr = new uchar[yuvsize];
+                    m_yuvPtr = std::shared_ptr<uchar[]>(new uchar[yuvsize]);
                     if (m_rgbPtr != nullptr) {
                         free(m_rgbPtr);
                         m_rgbPtr = nullptr;
@@ -270,12 +266,12 @@ void MajorImageProcessingThread::run()
                 }
 
                 if (m_bHorizontalMirror) {
-                    ImageHorizontalMirror(m_frame->yuv_frame, m_yuvPtr,m_frame->width,m_frame->height);
+                    ImageHorizontalMirror(m_frame->yuv_frame, m_yuvPtr.get(), m_frame->width, m_frame->height);
                 } else {
-                    memcpy(m_yuvPtr, m_frame->yuv_frame, yuvsize);
+                    memcpy(m_yuvPtr.get(), m_frame->yuv_frame, yuvsize);
                 }
                 pOldYuvFrame = m_frame->yuv_frame;
-                m_frame->yuv_frame = m_yuvPtr;
+                m_frame->yuv_frame = m_yuvPtr.get();
             } else if (GStreamer_Env == m_eEncodeEnv) {
                 // qDebug() << "Processing video frame in GStreamer environment";
                 // GStreamer环境下，获取的帧数据为jpg格式，需要转换为rgb格式，GStreamer底层才能处理
@@ -292,9 +288,6 @@ void MajorImageProcessingThread::run()
 #if defined(_loongarch) || defined(__loongarch__) || defined(__loongarch64) || defined (__mips__)
             bUseRgb = true;
 #endif
-            if(DSysInfo::majorVersion().toInt() >= 23) {
-                bUseRgb = true;
-            }
             if (get_wayland_status())
                 bUseRgb = true;
 
@@ -304,6 +297,14 @@ void MajorImageProcessingThread::run()
             // GStreamer环境下，使用rgb格式显示帧数据
             if (GStreamer_Env == m_eEncodeEnv)
                 bUseRgb = true;
+
+            // DConfig配置控制RGB数据使用模式，-1表示不设置(由系统自动判断)，0表示强制关闭，1表示强制开启
+            int useRgbData = DataManager::instance()->getUseRgbData();
+            if (useRgbData == 1) {
+                bUseRgb = true;
+            } else if (useRgbData == 0) {
+                bUseRgb = false;
+            }
 
             if (bUseRgb || (m_bPhoto && m_filtersGroupDislay)) {
                 // qDebug() << "Processing video frame in rgb mode";
@@ -530,12 +531,7 @@ void MajorImageProcessingThread::run()
 
 MajorImageProcessingThread::~MajorImageProcessingThread()
 {
-    // qDebug() << "Cleaning up MajorImageProcessingThread resources";
-    if (m_yuvPtr) {
-        // qDebug() << "Cleaning up MajorImageProcessingThread resources";
-        delete [] m_yuvPtr;
-        m_yuvPtr = nullptr;
-    }
+    m_yuvPtr.reset();
 
     if (m_rgbPtr) {
         // qDebug() << "Cleaning up MajorImageProcessingThread resources";

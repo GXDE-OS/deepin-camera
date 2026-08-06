@@ -1,5 +1,5 @@
-// Copyright (C) 2020 ~ 2021 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2020 - 2026 Uniontech Software Technology Co.,Ltd.
+// SPDX-FileCopyrightText: 2023 -2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -28,6 +28,7 @@
 #include <QOpenGLFunctions>
 #include <QDateTime>
 #include <QGraphicsView>
+#include <QReadWriteLock>
 
 #include "LPF_V4L2.h"
 #include "majorimageprocessingthread.h"
@@ -74,6 +75,40 @@ public:
 
 protected:
     virtual void mouseMoveEvent(QMouseEvent* e) override;
+};
+
+/**
+* @brief ValidDevice 有效相机设备，与黑名单机制配套使用
+*/
+class ValidDevice
+{
+public:
+    ValidDevice() = default;
+    ValidDevice(const QString &_vid, const QString &_pid, const QString &_name, const QString &_device)
+        : vid(_vid), pid(_pid), name(_name), device(_device) {}
+
+    bool operator==(const ValidDevice &other) const {
+        return vid == other.vid && pid == other.pid && 
+                name == other.name && device == other.device;
+    }
+
+    // Setter 方法
+    void setVid(const QString &_vid) { vid = _vid; }
+    void setPid(const QString &_pid) { pid = _pid; }
+    void setName(const QString &_name) { name = _name; }
+    void setDevice(const QString &_device) { device = _device; }
+
+    // Getter 方法
+    QString getVid() const { return vid; }
+    QString getPid() const { return pid; }
+    QString getName() const { return name; }
+    QString getDevice() const { return device; }
+
+private:
+    QString vid; // 相机VID
+    QString pid; // 相机PID
+    QString name; // 相机名称
+    QString device; // 相机设备节点路径
 };
 
 /**
@@ -278,6 +313,11 @@ public:
     */
     void showCamUsed();
 
+    /**
+    * @brief getValidDeviceNum 获取有效设备数量
+    * @return 有效设备数量
+    */
+    int getValidDeviceNum();
 public slots:
     /**
     * @brief onTakePic　拍照事件响应
@@ -337,6 +377,11 @@ public slots:
      * @param bLocked 是否处于锁屏状态
      */
     void onLockedScreen(bool bLocked);
+
+    /**
+     * @brief 更新有效相机设备列表
+     */
+    void updateValidDevices();
 
 private slots:
     /**
@@ -433,10 +478,48 @@ private:
     int switchCamera(const char *device, const char *devName);
 
     /**
+     * @brief 获取USB摄像头分组
+     * @param devlist 设备列表
+     * @param vGroupData 分组
+     * @return 分组个数
+     */
+    int getUSBCameraGroup(v4l2_device_list_t *devlist, QVector<QPair<QString, QVector<v4l2_dev_sys_data_t *>>> &vGroupData);
+
+    /**
      * @brief getSaveFilePrefix
      * @return UOS_ 专业版 DEEPIN_ 社区版 CAMERA_ 其他
      */
     QString getSaveFilePrefix();
+
+    /**
+    * @brief formatDeviceId 格式化设备ID
+    * @param id 设备ID
+    * @return 格式化后的设备ID
+    */
+    static QString formatDeviceId(uint id) {
+        // 格式化设备ID为4位十六进制数，不足4位用0填充
+        return QString("%1").arg(id, 4, 16, QLatin1Char('0'));
+    }
+
+    /**
+     * @brief 获取第一个有效的设备
+     * @return 没找到时返回空字符串
+     */
+    QString getFirstValidDevice();
+
+    /**
+     * @brief 判断设备是否有效
+     * @param device 设备识别路径 /dev/video*
+     * @return true 有效 false 无效
+     */
+    bool isDeviceValidByDevice(const QString &device);
+
+    /**
+     * @brief 获取设备在有效设备列表中的索引
+     * @param device 设备识别路径 /dev/video*
+     * @return 索引 无效时返回-1
+     */
+    int getValidDeviceIndexByDevice(const QString &device);
 public:
     MajorImageProcessingThread *m_imgPrcThread;
     AudioProcessingThread      *m_audPrcThread;
@@ -498,6 +581,8 @@ private:
     int                        m_exposure;
     bool                       m_isFlash = false;
     bool                       m_isLockedScreen = false; // 是否处于锁屏状态
+    QVector<ValidDevice>       m_validDevices; // 有效相机设备列表
+    QReadWriteLock             m_mutexValidDevices; // 有效相机设备列表读写锁
 };
 
 #endif // VIDEOWIDGET_H

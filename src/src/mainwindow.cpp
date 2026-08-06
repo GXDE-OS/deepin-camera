@@ -1,5 +1,5 @@
-// Copyright (C) 2020 ~ 2021 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2020 - 2026 Uniontech Software Technology Co.,Ltd.
+// SPDX-FileCopyrightText: 2023 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -1294,11 +1294,12 @@ void CMainWindow::loadAfterShow()
     initEventFilter();
     reflushSnapshotLabel();
 
-    connect(m_devnumMonitor, SIGNAL(seltBtnStateEnable()), this, SLOT(setSelBtnShow()));   //显示切换按钮
-    connect(m_devnumMonitor, SIGNAL(seltBtnStateDisable()), this, SLOT(setSelBtnHide()));   //多设备信号
-    if (DataManager::instance()->encodeEnv() != QCamera_Env) {
-        connect(m_devnumMonitor, SIGNAL(existDevice()), m_videoPre, SLOT(onRestartDevices()));   //重启设备
-        connect(m_devnumMonitor, SIGNAL(noDeviceFound()), m_videoPre, SLOT(onRestartDevices()));   //重启设备
+    connect(m_devnumMonitor, SIGNAL(seltBtnStateEnable()), this, SLOT(setSelBtnShow()));//显示切换按钮
+    connect(m_devnumMonitor, SIGNAL(seltBtnStateDisable()), this, SLOT(setSelBtnHide()));//多设备信号
+    if(DataManager::instance()->encodeEnv() != QCamera_Env) {
+        connect(m_devnumMonitor, SIGNAL(existDevice()), m_videoPre, SLOT(onRestartDevices()));//重启设备
+        connect(m_devnumMonitor, SIGNAL(noDeviceFound()), m_videoPre, SLOT(onRestartDevices()));//重启设备
+        connect(m_devnumMonitor, SIGNAL(deviceListChanged()), m_videoPre, SLOT(updateValidDevices())); // 更新可用设备列表
     } else if (DataManager::instance()->encodeEnv() == QCamera_Env) {
         initCameraConnection();
     }
@@ -1467,6 +1468,7 @@ void CMainWindow::onSwitchCameraSuccess(const QString &cameraName)
     m_labelCameraName->show();
     m_filterName->hide();
     m_showCameraNameTimer->start();
+    showChildWidget();
     qDebug() << "Function completed: onSwitchCameraSuccess";
 }
 
@@ -2237,6 +2239,11 @@ void CMainWindow::onLocalTimeChanged()
 void CMainWindow::setSelBtnShow()
 {
     qDebug() << "Function started: setSelBtnShow";
+    // 有效设备个数小于等于1，不显示切换按钮
+    if (m_videoPre->getValidDeviceNum() <= 1) {
+        return;
+    }
+
     m_bSwitchCameraShowEnable = true;
     if (m_cameraSwitchBtn->isHidden()) {
         showChildWidget();
@@ -2428,7 +2435,6 @@ void CMainWindow::onSettingsDlgClose()
     if (bPathChanged) {
         reflushSnapshotLabel();
     }
-    qDebug() << "Function completed: onSettingsDlgClose";
 }
 
 void CMainWindow::onEnableSettings(bool bTrue)
@@ -2550,9 +2556,12 @@ void CMainWindow::showChildWidget()
         showWidget(m_photoRecordBtn, true);
         return;
     }
+
+    // 8k分辨率时不显示录像功能
+    bool isResolutionTooHigh = checkResolutionTooHigh();
     showWidget(m_snapshotLabel, true);
     showWidget(m_cameraSwitchBtn, m_bSwitchCameraShowEnable);
-    showWidget(m_modeSwitchBox, true);
+    showWidget(m_modeSwitchBox, !isResolutionTooHigh);
     showWidget(m_photoRecordBtn, true);
     showWidget(m_takePhotoSettingArea, true);
     showWidget(m_filterName, m_bShowFilterName);
@@ -2573,6 +2582,21 @@ void CMainWindow::showWidget(DWidget *widget, bool bShow)
         }
     }
     qDebug() << "Function completed: showWidget";
+}
+
+bool CMainWindow::checkResolutionTooHigh() const
+{
+    int currentWidth  = 0;
+    int currentHeight = 0;
+    v4l2_dev_t *fd = get_v4l2_device_handler();
+    if (fd) {
+        currentWidth  = v4l2core_get_frame_width(fd);
+        currentHeight = v4l2core_get_frame_height(fd);
+    }
+    bool isTrue = currentWidth > MAX_WIDTH_LIMIT || currentHeight > MAX_HEIGHT_LIMIT;
+    qInfo() << __func__ << isTrue << currentWidth << "x" << currentHeight;
+
+    return isTrue;
 }
 
 CMainWindow::~CMainWindow()

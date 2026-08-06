@@ -5,6 +5,7 @@
 
 extern "C" {
 #include "camview.h"
+#include "v4l2_formats.h"
 }
 #include "mainwindow.h"
 #include "capplication.h"
@@ -213,6 +214,50 @@ int main(int argc, char *argv[])
 
     if (dconfig && dconfig->isValid() && dconfig->keyList().contains("previewNoDelay")) {
         DataManager::instance()->setPreviewNoDelay(dconfig->value("previewNoDelay", false).toBool());
+    }
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("enableUsbGroup")) {
+        bool enable = dconfig->value("enableUsbGroup").toBool();
+        qInfo() << "enable USB group:" << enable;
+        DataManager::instance()->setEnableUsbGroup(enable);
+    }
+
+    // 是否开启8K预览通过DConfig控制，目前要求开启8K预览的厂家是希沃
+    // 希沃的8K分辨率是8192x2772，希沃在8K预览的时候表现正常，在录像的时候表现异常，所以在开启8K预览的时候我们会禁用录像功能
+    // 8K预览功能默认关闭，因为多个厂家的摄像头在8K预览的时候表现异常
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("enable8kPreview")) {
+        bool enable = dconfig->value("enable8kPreview").toBool();
+        qInfo() << "enable 8K preview:" << enable;
+        DataManager::instance()->setEnable8kPreview(enable);
+        set_enable_8k_preview(enable ? 1 : 0);
+    }
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("deviceBlacklist")) {
+        QStringList deviceBlacklist = dconfig->value("deviceBlacklist").toStringList();
+        qInfo() << "device blacklist:" << deviceBlacklist;
+        DataManager::instance()->setDeviceBlacklist(deviceBlacklist);
+    }
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("preferredResolution")) {
+        QString preferredResolution = dconfig->value("preferredResolution").toString();
+        qInfo() << "preferred resolution:" << preferredResolution;
+        if (!preferredResolution.isEmpty()) {
+            DataManager::instance()->setPreferredResolution(preferredResolution);
+            QSize size = DataManager::instance()->getPreferredResolution();
+            if (!size.isNull()) {
+                set_preferred_resolution(size.width(), size.height());
+            }
+        }
+    }
+
+    if (dconfig && dconfig->isValid() && dconfig->keyList().contains("useRgbData")) {
+        int useRgbData = dconfig->value("useRgbData").toInt();
+        if (useRgbData != -1 && useRgbData != 0 && useRgbData != 1) {
+            qWarning() << "Invalid useRgbData value in config:" << useRgbData << "- mapping to default value -1 (auto)";
+            useRgbData = -1; 
+        }
+        qInfo() << "use RGB data for preview:" << useRgbData;
+        DataManager::instance()->setUseRgbData(useRgbData);
     }
 
     if (!libVaDriverName.isEmpty()) {

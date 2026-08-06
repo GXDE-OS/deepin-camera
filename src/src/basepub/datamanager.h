@@ -1,5 +1,5 @@
-// Copyright (C) 2020 ~ 2021 Uniontech Software Technology Co.,Ltd.
-// SPDX-FileCopyrightText: 2023 UnionTech Software Technology Co., Ltd.
+// Copyright (C) 2020 - 2026 Uniontech Software Technology Co.,Ltd.
+// SPDX-FileCopyrightText: 2023 - 2026 UnionTech Software Technology Co., Ltd.
 //
 // SPDX-License-Identifier: GPL-3.0-or-later
 
@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QSet>
+#include <QSize>
 
 enum GridType
 {
@@ -165,6 +166,63 @@ public:
      */
     bool isPreviewNoDelay() const { return m_isPreviewNoDelay; };
 
+    /**
+     * @brief 设置是否启用USB摄像头分组
+     * @param enable
+     */
+    void setEnableUsbGroup(bool enable) { m_enableUsbGroup = enable; };
+    /**
+     * @brief 获取是否启用USB摄像头分组
+     * @return
+     */
+    bool isEnableUsbGroup() const { return m_enableUsbGroup; };
+
+    /**
+     * @brief 设置是否启用8K预览
+     * @param enable
+     */
+    void setEnable8kPreview(bool enable) { m_enable8kPreview = enable; };
+
+    /**
+     * @brief 获取是否启用8K预览
+     * @return
+     */
+    bool isEnable8kPreview() const { return m_enable8kPreview; };
+
+    /**
+     * @brief 设置Camera设备黑名单
+     * @param blacklist
+     */
+    void setDeviceBlacklist(const QStringList &blacklist);
+    /**
+     * @brief 检查当前设备是否有效
+     * @return
+     */
+    bool isDeviceValid(const QString &vid, const QString &pid, const QString &name);
+
+    /**
+     * @brief 设置首选分辨率
+     * @param resolution 分辨率字符串，格式如 "1920x1080"
+     */
+    void setPreferredResolution(const QString &resolution);
+
+    /**
+     * @brief 获取首选分辨率
+     * @return 分辨率
+     */
+    QSize getPreferredResolution();
+
+    /**
+     * @brief 设置RGB数据预览模式
+     * @param mode -1:不设置(自动), 0:强制关闭, 1:强制开启
+     */
+    void setUseRgbData(int mode) { m_useRgbData = mode; };
+
+    /**
+     * @brief 获取RGB数据预览模式
+     * @return -1:不设置(自动), 0:强制关闭, 1:强制开启
+     */
+    int getUseRgbData() const { return m_useRgbData; };
 private:
     DataManager();
     static DataManager *m_dataManager;
@@ -176,5 +234,10 @@ private:
     bool m_H264EncoderExists;
     bool m_isSupportCameraSwitch = false; // 是否带有摄像头开关
     bool m_isPreviewNoDelay = false; // 是否预览无延迟
+    bool m_enableUsbGroup = false; // 是否启用USB摄像头分组
+    bool m_enable8kPreview = false; // 是否启用8K预览
+    QSet<QString> m_deviceBlacklistSet; // 设备黑名单
+    QSize m_preferredResolution; // 首选分辨率
+    int m_useRgbData = -1; // RGB数据预览模式：-1不设置(自动), 0强制关闭, 1强制开启
 };
 #endif // DATAMANAGER_H

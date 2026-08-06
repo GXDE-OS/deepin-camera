@@ -110,4 +110,66 @@ void free_frame_formats(v4l2_dev_t *vd);
  */
 int is_valid_resolution(int width, int height);
 
+/*
+ * set enable 8k preview
+ * args:
+ *   enable - enable 8k preview
+ *
+ * asserts:
+ *   none
+ *
+ * returns: void
+ */
+void set_enable_8k_preview(int enable);
+
+/*
+ * check if 8k preview is enabled
+ * args:
+ *   none
+ *
+ * asserts:
+ *   none
+ *
+ * returns: TRUE(1) if enabled
+ *          FALSE(0) if not
+ */
+int is_enable_8k_preview();
+
+/**
+ * set preferred resolution
+ * args:
+ *   width - preferred width
+ *   height - preferred height
+ *
+ * asserts:
+ *   none
+ *
+ * returns: void
+ */
+void set_preferred_resolution(int width, int height);
+
+/**
+ * get preferred resolution width
+ * args:
+ *   none
+ *
+ * asserts:
+ *   none
+ *
+ * returns: preferred width
+ */
+int get_preferred_resolution_width();
+
+/**
+ * get preferred resolution height
+ * args:
+ *   none
+ *
+ * asserts:
+ *   none
+ *
+ * returns: preferred height
+ */
+int get_preferred_resolution_height();
+
 #endif
