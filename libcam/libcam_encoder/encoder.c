@@ -309,8 +309,32 @@ void /*__attribute__ ((destructor))*/ gviewencoder_fini()
  *
  * returns: 1 - sample format is supported; 0 - is not supported
  */
+/*
+ * FFmpeg 7.1 (libavcodec 61.13.100) 起用 avcodec_get_supported_config() 取代
+ * AVCodec 的 sample_fmts/supported_samplerates 字段，FFmpeg 8 已删除这些字段
+ */
+#if LIBAVCODEC_VERSION_INT >= AV_VERSION_INT(61, 13, 100)
+#define LIBCAM_HAVE_SUPPORTED_CONFIG
+#endif
+
 static int encoder_check_audio_sample_fmt(AVCodec *codec, enum AVSampleFormat sample_fmt)
 {
+#ifdef LIBCAM_HAVE_SUPPORTED_CONFIG
+    const enum AVSampleFormat *p = NULL;
+    int n = 0;
+
+    if (avcodec_get_supported_config(NULL, codec, AV_CODEC_CONFIG_SAMPLE_FORMAT, 0,
+                                     (const void **)&p, &n) < 0)
+        return 0;
+    /* NULL 表示编码器未声明限制，任意格式都可用 */
+    if (!p)
+        return 1;
+    for (int i = 0; i < n; i++) {
+        if (p[i] == sample_fmt)
+            return 1;
+    }
+    return 0;
+#else
     const enum AVSampleFormat *p = codec->sample_fmts;
 
     while (*p != AV_SAMPLE_FMT_NONE) {
@@ -319,6 +343,7 @@ static int encoder_check_audio_sample_fmt(AVCodec *codec, enum AVSampleFormat sa
         p++;
     }
     return 0;
+#endif
 }
 /*
  * check that a given sample rate is supported by the encoder
@@ -336,10 +361,19 @@ static int select_sample_rate(const AVCodec *codec, int sample_rate)
     const int *p;
     int best_samplerate = 0;
 
+#ifdef LIBCAM_HAVE_SUPPORTED_CONFIG
+    int n = 0;
+
+    /* 返回的列表与旧字段一样以 0 结尾；NULL 表示不限采样率 */
+    if (avcodec_get_supported_config(NULL, codec, AV_CODEC_CONFIG_SAMPLE_RATE, 0,
+                                     (const void **)&p, &n) < 0 || !p)
+        return sample_rate;
+#else
     if (!codec->supported_samplerates)
         return sample_rate;
 
     p = codec->supported_samplerates;
+#endif
     while (*p) {
         if (*p == sample_rate)
             return sample_rate;

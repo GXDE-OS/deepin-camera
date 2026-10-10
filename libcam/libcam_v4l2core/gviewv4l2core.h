@@ -430,7 +430,7 @@ int v4l2core_get_this_device_index(v4l2_dev_t *vd);
  *
  * returns void
  */
-void v4l2core_disable_libv4l2();
+void v4l2core_disable_libv4l2(void);
 
 int get_my_width(void);
 
@@ -630,7 +630,7 @@ int v4l2core_get_device_index(const char *videodevice);
  *
  * returns: true(1) if device list was updated, false(0) otherwise
  */
-int v4l2core_check_device_list_events();
+int v4l2core_check_device_list_events(v4l2_dev_t *vd);
 
 /*
  * check for control events
@@ -1435,7 +1435,7 @@ int v4l2core_save_image(
  *
  * returns: monotonic time in nanoseconds
  */
-uint64_t v4l2core_time_get_timestamp();
+uint64_t v4l2core_time_get_timestamp(void);
 
 __END_DECLS
 

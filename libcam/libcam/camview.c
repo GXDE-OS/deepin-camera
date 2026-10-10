@@ -1046,7 +1046,7 @@ void *capture_loop(void *data)
     if(my_options->photo_timer > 0)
     {
         my_photo_timer = NSEC_PER_SEC * my_options->photo_timer;
-        my_last_photo_time = v4l2core_time_get_timestamp(my_vd); /*timer count*/
+        my_last_photo_time = v4l2core_time_get_timestamp(); /*timer count*/
     }
 
     if(my_options->photo_npics > 0)
@@ -1300,12 +1300,12 @@ void *capture_loop(void *data)
  *
  * returns: error code
  */
-int start_encoder_thread(void *data)
+int start_encoder_thread(void)
 {
     if (encode_thread_running)
         return 0;
 
-    int ret = __THREAD_CREATE(&encoder_thread, encoder_loop, data);
+    int ret = __THREAD_CREATE(&encoder_thread, encoder_loop, NULL);
 
     if(ret) {
         fprintf(stderr, "deepin-camera: encoder thread creation failed (%i)\n", ret);

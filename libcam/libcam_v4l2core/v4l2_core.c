@@ -661,7 +661,7 @@ void v4l2core_set_frame_queue_size(int size)
  *
  * returns void
  */
-void v4l2core_disable_libv4l2()
+void v4l2core_disable_libv4l2(void)
 {
 	disable_libv4l2 = 1;
 }

@@ -137,7 +137,7 @@ uint64_t ns_time_monotonic()
  *
  * returns: monotonic time in nanoseconds
  */
-uint64_t v4l2core_time_get_timestamp()
+uint64_t v4l2core_time_get_timestamp(void)
 {
 	return ns_time_monotonic();
 }
