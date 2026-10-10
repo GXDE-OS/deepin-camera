@@ -1,3 +1,9 @@
+deepin-camera (6.5.48) unstable; urgency=medium
+
+  * Build against FFMPEG8.
+
+ -- CharOfString <root@charofstring.cc>  Fri, 09 Oct 2026 23:33:02 -0500
+
 deepin-camera (6.5.47) unstable; urgency=medium
 
   * fix(ui): enable QPainter antialiasing for Qt6 build
