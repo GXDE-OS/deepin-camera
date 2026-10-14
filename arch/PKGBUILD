@@ -1,0 +1,44 @@
+# Maintainer: CharOfString <root@charofstring.cc>
+pkgname=deepin-camera-git
+pkgver=6.5.48
+pkgrel=1
+pkgdesc='Camera application for GXDE'
+arch=('x86_64' 'aarch64')
+url="https://github.com/GXDE-OS/deepin-camera"
+license=('GPL-3.0-or-later' 'LGPL-3.0-or-later' 'BSD-3-Clause' 'CC-BY-4.0' 'CC0-1.0')
+# FFmpeg、GStreamer、PortAudio、libv4l2、libusb、libudev、ffmpegthumbnailer 在运行时通过 dlopen 加载
+# FFmpeg, GStreamer, PortAudio, libv4l2, libusb, libudev and ffmpegthumbnailer
+# are loaded with dlopen at runtime.
+depends=('dtk6core-git' 'dtk6gui-git' 'dtk6widget-git' 'libimageeditor6-git' 'qt6-base' 'qt6-multimedia' 'qt6-svg' 'ffmpeg'
+         'ffmpegthumbnailer' 'gstreamer' 'gst-plugins-base-libs' 'gst-plugins-good' 'portaudio' 'v4l-utils'
+         'libusb' 'systemd-libs' 'libva' 'libpciaccess' 'glib2' 'libx11' 'hicolor-icon-theme' 'libgcc'
+         'libstdc++' 'glibc')
+# src/CMakeLists.txt 读取 /etc/os-version，与 Debian 的 deepin-desktop-base 一样由 gxde-desktop-base-git 提供
+# src/CMakeLists.txt reads /etc/os-version, which gxde-desktop-base-git ships
+# as deepin-desktop-base does for Debian.
+makedepends=('git' 'cmake' 'ninja' 'pkgconf' 'qt6-tools' 'gxde-desktop-base-git')
+provides=('deepin-camera')
+conflicts=('deepin-camera' 'gxde-camera-git')
+source=()
+sha512sums=()
+
+# 直接使用 PKGBUILD 所在的 git 仓库作为源码 ・ Build from the git checkout this PKGBUILD lives in.
+_srcroot() {
+  git -C "$startdir" rev-parse --show-toplevel
+}
+
+build() {
+  # 与 debian/rules 相同 ・ Same as debian/rules.
+  cmake -B build -S "$(_srcroot)" -GNinja \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DAPP_VERSION="$pkgver" \
+    -DVERSION="$pkgver"
+  ninja -C build
+}
+
+package() {
+  DESTDIR="$pkgdir" ninja -C build install
+  # 与 debian/manpages 相同 ・ Same as debian/manpages.
+  install -Dm644 "$(_srcroot)/debian/deepin-camera.1" "$pkgdir/usr/share/man/man1/deepin-camera.1"
+}
