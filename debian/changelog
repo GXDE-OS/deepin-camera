@@ -1,3 +1,9 @@
+deepin-camera (6.5.48-2) UNRELEASED; urgency=medium
+
+  * feat: 使用小标题栏替代默认大标题栏
+
+ -- gfdgd_xi <3025613752@qq.com>  Sun, 25 Oct 2026 20:39:15 +0800
+
 deepin-camera (6.5.48) unstable; urgency=medium
 
   * Build against FFMPEG8.
