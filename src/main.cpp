@@ -140,6 +140,7 @@ static void handleSignal(int sig)
 
 int main(int argc, char *argv[])
 {
+    qputenv("D_DTK_SIZEMODE", "1");
     // 初始化日志规则：读取环境变量和 DConfig 配置
     MLogger logger;
 
