@@ -250,7 +250,7 @@ install(FILES ${PROJECT_SOURCE_DIR}/assets/deepin-camera.svg
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/assets/panel/Icons DESTINATION ${CMAKE_INSTALL_DATADIR}/due-shell/shortcuts)
 
 #manual
-install(DIRECTORY ${PROJECT_SOURCE_DIR}/assets/deepin-camera DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-manual/manual-assets/application/)
+#install(DIRECTORY ${PROJECT_SOURCE_DIR}/assets/deepin-camera DESTINATION ${CMAKE_INSTALL_DATADIR}/deepin-manual/manual-assets/application/)
 
 #debus_service
 install(FILES ${PROJECT_SOURCE_DIR}/com.deepin.Camera.service DESTINATION ${CMAKE_INSTALL_DATADIR}/dbus-1/services)
