@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ms">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="ms">
 <context>
     <name>CMainWindow</name>
     <message>
@@ -241,7 +239,7 @@
     <message>
         <location filename="../src/settings_translation.cpp" line="33"/>
         <source>Maximum resolution:</source>
-        <translation>Pemecutan tajuk maksimum:</translation>
+        <translation>Resolusi maksimum:</translation>
     </message>
 </context>
 <context>
@@ -329,14 +327,14 @@
         <location filename="../src/Settings.cpp" line="64"/>
         <location filename="../src/Settings.cpp" line="67"/>
         <source>mp4</source>
-        <translation>mp4</translation>
+        <translation>MP4</translation>
     </message>
     <message>
         <location filename="../src/Settings.cpp" line="64"/>
         <location filename="../src/Settings.cpp" line="67"/>
         <location filename="../src/Settings.cpp" line="71"/>
         <source>webm</source>
-        <translation>webm</translation>
+        <translation>WebM</translation>
     </message>
 </context>
 <context>

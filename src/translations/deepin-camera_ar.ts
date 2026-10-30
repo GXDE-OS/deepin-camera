@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Open folder</source>
-        <translation type="vanished">فتح مجلد</translation>
+        <translation>فتح مجلد</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2217"/>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Invalid folder</source>
-        <translation type="vanished">مجلد غير صالح</translation>
+        <translation>مجلد غير صالح</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="331"/>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>Save to:</source>
-        <translation type="vanished">حفظ إلى:</translation>
+        <translation>حفظ إلى:</translation>
     </message>
     <message>
         <location filename="../src/settings_translation.cpp" line="27"/>
@@ -196,7 +196,7 @@
     </message>
     <message>
         <source>Resolution:</source>
-        <translation type="vanished">الدِّقَّة:</translation>
+        <translation>الدِّقَّة:</translation>
     </message>
     <message>
         <location filename="../src/settings_translation.cpp" line="14"/>
@@ -306,15 +306,15 @@
     <name>ThumbnailsBar</name>
     <message>
         <source>Take photo</source>
-        <translation type="vanished">التقاط صورة</translation>
+        <translation>التقاط صورة</translation>
     </message>
     <message>
         <source>Record video</source>
-        <translation type="vanished">تسجيل فيديو</translation>
+        <translation>تسجيل فيديو</translation>
     </message>
     <message>
         <source>Stop taking photos</source>
-        <translation type="vanished">إيقاف التقاط الصور</translation>
+        <translation>إيقاف التقاط الصور</translation>
     </message>
 </context>
 <context>
@@ -449,7 +449,7 @@
     </message>
     <message>
         <source>Stop recording</source>
-        <translation type="vanished">إيقاف التسجيل</translation>
+        <translation>إيقاف التسجيل</translation>
     </message>
 </context>
 </TS>
